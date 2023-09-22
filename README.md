@@ -8,7 +8,7 @@ With this understanding, you can help bypass AV/EDR detection by avoiding callin
 
 ![injection_technique](injection_techniques.png)
 
-You can accomplish this using [SysWhispers3](https://github.com/klezVirus/SysWhispers3), which will create the header, source, and assembly instruction files that will make these calls through your own project, instead of using NTDLL.DLL:
+You can accomplish this using [SysWhispers3](https://github.com/klezVirus/SysWhispers3), which will create the header, source, and assembly instruction files that will make these calls through your own project, instead of using `NTDLL.DLL`:
 
 ```
  $ python syswhispers.py --preset all --out-file temp/syscalls_all -v
