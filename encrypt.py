@@ -7,13 +7,15 @@ import sys
 def encrypt(plaintext: bytes, key: bytes) -> tuple:
     # Ensure that the key is 32 bytes long
     hashKey = sha256(key).digest()
+    k = sha256(key).digest()
     # IV will just be 16 null bytes
     iv = bytes([0] *AES.block_size)
     # Ensure plaintext is padded to AES block length (16 bytes)
     plaintext = Padding.pad(plaintext, AES.block_size)
     # Encrypt with AES in CBC mode
     cipher = AES.new(hashKey, AES.MODE_CBC, iv)
-    return cipher.encrypt(plaintext), hashKey
+    ciphertext = cipher.encrypt(plaintext)
+    return ciphertext, key
 
 def getBytes(file: str) -> bytes:
     with open(file, "rb") as f:
@@ -33,17 +35,18 @@ def main():
         print("[*] Usage: ./encrypt.py <EXECUTABLE_FILE>")
         exit(1)
     try:
-        plaintext = getBytes(sys.argv[0])
+        plaintext = getBytes(sys.argv[1])
     except:
         print("[-] Error occured during file read")
         exit(1)
-    ciphertext, key = encrypt(plaintext, b'l3mmyz')
+    ciphertext, key = encrypt(plaintext, get_random_bytes(16))
+
     c = [("0x" + y) for y in ("{:02x}".format(x) for x in ciphertext)]
     k = [("0x" + y) for y in ("{:02x}".format(x) for x in key)]
     print("[+] Encryption success!")
+    print("char aesKey[] = {" + ", ".join(k) + '}')
     # In case you want to input the encrypted payload (if it's not too large), uncomment below
     # print("char payload[] = {" + ", ".join(c) + '}')
-    print("char aesKey[] = {" + ", ".join(k) + '}')
     print("[*] Writing encrypted file and key to disk")
     writeCryptoFiles(ciphertext, key)
     print("[+] Done!")
