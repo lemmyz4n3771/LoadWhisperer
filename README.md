@@ -35,3 +35,7 @@ Press a key to continue...
 
 ## Usage
 Run `encrypt.py` on your payload binary to generate the AES key and ciphertext to then include in LoadWhisperer.cpp. Then build LoadWhisperer.sln and use the resulting `.exe`.
+
+
+## Disclaimer
+This tool was designed for educational and demonstrative purposes. I'm not liable as to how you use it.
