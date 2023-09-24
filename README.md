@@ -1,6 +1,14 @@
 # LoadWhisperer
 LoadWhisperer uses direct syscalls to inject shellcode into a currently running process using the QueueAPC method, after sandbox detection and evasion and decrypting AES-encrypted shellcode. Read more about the QueueAPC method in another C# project I did [here](https://github.com/lemmyz4n3771/QueueUserAPC-ProcInjection).
 
+## Update
+
+Added DLL functionality to LoadWhisperer. Build the solution and test it directly like so:
+```
+rundll32.exe .\LoadWhispererDLL.dll, LoadWhisperer
+```
+You can also run the dll using the technique shown [here](https://github.com/lemmyz4n3771/Reflective-DLL-Injection).
+
 ## Using Direct Syscalls to NTDLL to Evade EDR Detection
 When calling the Windows API, the usual approach is to call a function in some dynamically-linked library (DLL), which then calls an NT-prefixed function (such as `NtProtectVirtualMemory`) in `NTDLL.DLL`, which will then execute a syscall that performs the requested functionality. It is these DLLs that EDRs hook into to examine the parameters of whatever function is called. 
 
