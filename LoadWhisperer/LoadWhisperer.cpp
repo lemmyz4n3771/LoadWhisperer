@@ -171,7 +171,7 @@ int main(int argc, char** argv) {
 	LPVOID startAllocation;
 	// Shellcode size for memory allocation
 	SIZE_T allocationSize = bin.len;
-	std::cout << "allocationSize: " << allocationSize << std::endl;
+
 	// Handles to thread and process we will inject into
 	HANDLE hThread;
 	HANDLE hProcess;
